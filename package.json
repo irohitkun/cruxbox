@@ -1,0 +1,24 @@
+{
+  "name": "primary",
+  "version": "1.0.0",
+  "description": "Crux - The Discord Bot landing page",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "python3 -m http.server 8000 || python -m SimpleHTTPServer 8000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/irohitkun/cruxbox.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/irohitkun/cruxbox/issues"
+  },
+  "homepage": "https://github.com/irohitkun/cruxbox#readme",
+  "dependencies": {
+    "@vercel/speed-insights": "^2.0.0"
+  }
+}
