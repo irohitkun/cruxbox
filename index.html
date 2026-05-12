@@ -29,8 +29,13 @@
     body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
     a{color:inherit;text-decoration:none}
 
+    /* ── NOTICE BANNER ── */
+    .notice-banner{background:linear-gradient(90deg,rgba(88,101,242,.18),rgba(168,85,247,.12));border-bottom:1px solid rgba(88,101,242,.25);padding:9px clamp(20px,5vw,80px);display:flex;align-items:center;justify-content:center;gap:10px;font-size:.82rem;font-weight:600;color:var(--text);text-align:center;position:relative;z-index:101}
+    .notice-banner a{color:#a5b4fc;text-decoration:underline;text-underline-offset:3px}
+    .notice-banner .nb-badge{background:var(--blurple);color:#fff;padding:2px 8px;border-radius:6px;font-size:.72rem;font-weight:700;letter-spacing:.04em;flex-shrink:0}
+
     /* ── NAV ── */
-    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(20px,5vw,80px);height:64px;background:rgba(11,11,15,.92);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+    nav{position:sticky;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(20px,5vw,80px);height:64px;background:rgba(11,11,15,.92);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
     .nlogo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.1rem}
     .nlinks{display:flex;align-items:center;gap:28px}
     .nlinks a{color:var(--muted);font-size:.875rem;font-weight:500;transition:color .2s}
@@ -115,6 +120,8 @@
     .plist{list-style:none}
     .plist li{display:flex;gap:10px;align-items:flex-start;padding:7px 0;font-size:.855rem;color:var(--muted)}
     .plist li span{flex-shrink:0}
+
+    /* vote box */
     .vbox{margin-top:48px;background:linear-gradient(135deg,rgba(88,101,242,.08),rgba(168,85,247,.06));border:1px solid rgba(88,101,242,.2);border-radius:var(--radius);padding:48px 40px;text-align:center}
     .vbox h3{font-size:1.7rem;font-weight:800;margin-bottom:12px}
     .vbox>p{color:var(--muted);max-width:460px;margin:0 auto 32px;font-size:.925rem}
@@ -123,7 +130,9 @@
     .vsn{width:32px;height:32px;border-radius:50%;background:var(--blurple);color:#fff;font-weight:700;font-size:.85rem;display:grid;place-items:center}
     .vsl{font-size:.75rem;color:var(--muted);font-weight:500;white-space:nowrap}
     .va{color:var(--muted);font-size:1.1rem}
-    .soon-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(241,196,15,.1);border:1px solid rgba(241,196,15,.25);color:var(--gold);padding:4px 12px;border-radius:99px;font-size:.72rem;font-weight:700;letter-spacing:.05em;margin-bottom:16px}
+    .live-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(87,242,135,.1);border:1px solid rgba(87,242,135,.3);color:var(--green);padding:4px 12px;border-radius:99px;font-size:.72rem;font-weight:700;letter-spacing:.05em;margin-bottom:16px}
+    .live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 1.5s ease-in-out infinite}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
 
     /* ── COMMANDS ── */
     .cwrap{background:var(--bg2);border-top:1px solid var(--border)}
@@ -145,6 +154,32 @@
     .csearch::placeholder{color:var(--muted)}
     .csearch:focus{border-color:var(--blurple)}
     .cno-results{text-align:center;color:var(--muted);font-size:.9rem;padding:40px 0;display:none}
+
+    /* ── CHANGELOG ── */
+    .clwrap{background:var(--bg);border-top:1px solid var(--border)}
+    .clinner{max-width:860px;margin:0 auto}
+    .clentries{display:flex;flex-direction:column;gap:20px;margin-top:48px}
+    .clentry{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+    .clheader{display:flex;align-items:center;gap:14px;padding:20px 28px;border-bottom:1px solid var(--border);cursor:pointer;user-select:none;transition:background .15s}
+    .clheader:hover{background:rgba(255,255,255,.02)}
+    .clver{font-family:'JetBrains Mono',monospace;font-size:.8rem;font-weight:700;color:var(--blurple);background:rgba(88,101,242,.1);border:1px solid rgba(88,101,242,.2);padding:3px 10px;border-radius:6px;flex-shrink:0}
+    .cltitle{font-weight:700;font-size:.95rem;flex:1}
+    .cldate{font-size:.75rem;color:var(--muted);margin-left:auto;flex-shrink:0}
+    .clchevron{color:var(--muted);font-size:.8rem;transition:transform .2s;flex-shrink:0}
+    .clentry.open .clchevron{transform:rotate(180deg)}
+    .clbody{display:none;padding:24px 28px}
+    .clentry.open .clbody{display:block}
+    .clsection{margin-bottom:18px}
+    .clsection:last-child{margin-bottom:0}
+    .clsec-label{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px;padding:2px 8px;border-radius:4px;display:inline-block}
+    .clsec-added{color:#57f287;background:rgba(87,242,135,.08);border:1px solid rgba(87,242,135,.15)}
+    .clsec-changed{color:#f1c40f;background:rgba(241,196,15,.08);border:1px solid rgba(241,196,15,.15)}
+    .clsec-fixed{color:#5865f2;background:rgba(88,101,242,.08);border:1px solid rgba(88,101,242,.15)}
+    .clsec-removed{color:#ed4245;background:rgba(237,66,69,.08);border:1px solid rgba(237,66,69,.15)}
+    .clitems{list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:10px}
+    .clitems li{font-size:.855rem;color:var(--muted);line-height:1.6;display:flex;gap:8px;align-items:flex-start}
+    .clitems li::before{content:'·';color:var(--blurple);font-size:1.1rem;flex-shrink:0;margin-top:-2px}
+    .clitems strong{color:var(--text)}
 
     /* ── CTA ── */
     .ctawrap{text-align:center;padding:clamp(80px,12vw,140px) clamp(20px,5vw,80px)}
@@ -178,6 +213,13 @@
 </head>
 <body>
 
+<!-- ── NOTICE BANNER ── -->
+<div class="notice-banner">
+  <span class="nb-badge">🆕 v2.7</span>
+  Jail system, TempRole, Mass Timeout &amp; live Top.gg voting — now live!
+  <a href="#changelog">See what's new →</a>
+</div>
+
 <nav>
   <div class="nlogo"><img src="logo.jpg" alt="Crux" style="width:34px;height:34px;border-radius:10px;object-fit:cover" />Crux</div>
   <div class="nlinks">
@@ -185,6 +227,7 @@
     <a href="#ai">AI</a>
     <a href="#premium">Premium</a>
     <a href="#commands">Commands</a>
+    <a href="#changelog">Changelog</a>
     <a href="https://discord.gg/7p3V3Vb8Vt" target="_blank" rel="noopener" style="color:var(--muted)">Support</a>
   </div>
   <div class="nright">
@@ -201,11 +244,12 @@
   <a href="#ai" onclick="closeNav()">AI</a>
   <a href="#premium" onclick="closeNav()">Premium</a>
   <a href="#commands" onclick="closeNav()">Commands</a>
+  <a href="#changelog" onclick="closeNav()">Changelog</a>
   <a href="https://discord.gg/7p3V3Vb8Vt" target="_blank" rel="noopener">💬 Support Server</a>
 </div>
 
 <section class="hero">
-  <div class="hbadge">✨ v2.6 — Bug Fixes &amp; AI Improvements</div>
+  <div class="hbadge">✨ v2.7 — Jail, TempRole, Mass Timeout &amp; Live Voting</div>
   <h1><span class="grad">The Discord Bot<br/>Your Server Deserves</span></h1>
   <p class="hsub">Full moderation, AI-powered commands, AutoMod, tickets, giveaways, and more — all in one bot.</p>
   <div class="hctas">
@@ -213,13 +257,13 @@
     <a href="#features" class="bs">Explore Features →</a>
   </div>
   <div class="hstats">
-    <div class="hstat"><div class="hnum" data-count="70" data-suffix="+">0</div><div class="hlbl">Commands</div></div>
+    <div class="hstat"><div class="hnum" data-count="75" data-suffix="+">0</div><div class="hlbl">Commands</div></div>
     <div class="sdiv"></div>
     <div class="hstat"><div class="hnum" data-static="24/7">24/7</div><div class="hlbl">Uptime</div></div>
     <div class="sdiv"></div>
     <div class="hstat"><div class="hnum" data-static="Free">Free</div><div class="hlbl">Open Source</div></div>
     <div class="sdiv"></div>
-    <div class="hstat"><div class="hnum" data-static="v2.6">v2.6</div><div class="hlbl">Latest Version</div></div>
+    <div class="hstat"><div class="hnum" data-static="v2.7">v2.7</div><div class="hlbl">Latest Version</div></div>
   </div>
 </section>
 
@@ -231,13 +275,16 @@
     <div class="fcard"><div class="ficon">🔨</div><div class="ftitle">Full Moderation Suite</div><div class="fdesc">Ban, kick, timeout, warn, purge, lock, slowmode and more. Every action is logged to your mod-log channel with full executor info.</div></div>
     <div class="fcard"><div class="ficon">🤖</div><div class="ftitle">AI Assistant</div><div class="fdesc">Describe what you want in plain English — the bot does it. "Timeout @user 10m for spam and purge their last 20 messages."</div><div class="ftag">⭐ PREMIUM</div></div>
     <div class="fcard"><div class="ficon">🛡️</div><div class="ftitle">AutoMod</div><div class="fdesc">Word filter, anti-spam, mention limits, caps filter, and invite/link blocker. Fully configurable with your own word lists.</div><div class="ftag">⭐ PREMIUM</div></div>
+    <div class="fcard"><div class="ficon">🔒</div><div class="ftitle">Jail System</div><div class="fdesc">Isolate a member instantly — removes all their roles, assigns a jail role, and restores everything on release. Full audit log.</div></div>
+    <div class="fcard"><div class="ficon">🏷️</div><div class="ftitle">Temp Role</div><div class="fdesc">Assign a role temporarily — it's automatically removed after the set duration even if the bot restarts.</div></div>
+    <div class="fcard"><div class="ficon">🔇</div><div class="ftitle">Mass Timeout</div><div class="fdesc">Timeout all humans or members with a specific role in one command. Perfect for raid situations.</div></div>
     <div class="fcard"><div class="ficon">🎙️</div><div class="ftitle">Join-to-Create Channels</div><div class="fdesc">Members join a hub channel and instantly get their own private voice channel. They own it — rename, lock, set limits, kick members, or delete it via /j2cpanel.</div><div class="ftag">⭐ PREMIUM</div></div>
     <div class="fcard"><div class="ficon">🎫</div><div class="ftitle">Ticket System</div><div class="fdesc">Button-based support tickets with full transcripts on close. Multiple panels for different support topics.</div></div>
     <div class="fcard"><div class="ficon">🎉</div><div class="ftitle">Giveaways</div><div class="fdesc">Create timed giveaways with role and account age requirements. Instant reroll for winners.</div></div>
     <div class="fcard"><div class="ficon">🏆</div><div class="ftitle">Community &amp; XP</div><div class="fdesc">Chat XP, leveling, leaderboards, daily coin rewards and full member profiles to keep your community thriving.</div></div>
     <div class="fcard"><div class="ficon">🎭</div><div class="ftitle">Reaction Roles</div><div class="fdesc">Let members self-assign roles by reacting to a message. Fully configurable menus.</div></div>
     <div class="fcard"><div class="ficon">📋</div><div class="ftitle">Comprehensive Logging</div><div class="fdesc">Full audit trail: bans, unbans, kicks, timeouts, nickname changes, message edits/deletes, role &amp; channel changes, VC joins/leaves.</div></div>
-    <div class="fcard"><div class="ficon">🔒</div><div class="ftitle">AntiNuke</div><div class="fdesc">Protect your server from mass destructive actions — mass bans, channel deletes, role deletions, and webhook abuse.</div></div>
+    <div class="fcard"><div class="ficon">🔐</div><div class="ftitle">AntiNuke</div><div class="fdesc">Protect your server from mass destructive actions — mass bans, channel deletes, role deletions, and webhook abuse.</div></div>
     <div class="fcard"><div class="ficon">🎭</div><div class="ftitle">Confession System</div><div class="fdesc">Anonymous confession channel with mod review controls — let your community share freely and safely.</div></div>
     <div class="fcard"><div class="ficon">✅</div><div class="ftitle">Verification Gate</div><div class="fdesc">Button-based member verification to keep bots and raiders out of your server.</div></div>
     <div class="fcard"><div class="ficon">🎨</div><div class="ftitle">Embed Templates</div><div class="fdesc">Create reusable embed templates with variables like {user}, {server}, {count} for announcements and welcome messages.</div></div>
@@ -276,12 +323,14 @@
   <div class="pinner">
     <div class="slabel">Premium</div>
     <h2 class="stitle">Premium features</h2>
-    <p class="ssub">Unlock extra features for your server.</p>
+    <p class="ssub">Unlock extra features for your server — completely free by voting.</p>
     <div class="pgrid">
       <div class="pcard">
         <div class="pctitle">🆓 Free</div>
         <ul class="plist">
           <li><span>✓</span> All core moderation commands</li>
+          <li><span>✓</span> Jail system &amp; temp roles</li>
+          <li><span>✓</span> Mass timeout</li>
           <li><span>✓</span> Ticket system</li>
           <li><span>✓</span> Giveaways</li>
           <li><span>✓</span> Reaction roles</li>
@@ -289,7 +338,6 @@
           <li><span>✓</span> Verification gate</li>
           <li><span>✓</span> Confession system</li>
           <li><span>✓</span> AntiNuke protection</li>
-          <li><span>✓</span> Logging (basic)</li>
           <li><span>✓</span> All utility commands</li>
         </ul>
       </div>
@@ -308,13 +356,29 @@
         </ul>
       </div>
     </div>
-    <div class="vbox">
-      <div class="soon-badge">🕐 COMING SOON</div>
-      <h3>Free Premium via Voting</h3>
-      <p>Once Crux is listed on Top.gg, you'll be able to vote to earn free Premium for your server. This feature is not yet available — check back soon!</p>
-      <div style="background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:12px;padding:16px 24px;display:inline-block;color:var(--muted);font-size:.875rem">
-        Voting rewards will be enabled when the bot is publicly listed on Top.gg.
+    <div class="vbox" id="vote">
+      <div class="live-badge"><div class="live-dot"></div> LIVE NOW</div>
+      <h3>🗳️ Free Premium via Voting</h3>
+      <p>Vote for Crux on Top.gg every 12 hours — each vote earns you <strong style="color:var(--text)">16 hours of Premium</strong> for any server you choose, plus coins and XP rewards.</p>
+      <div class="vsteps">
+        <div class="vs"><div class="vsn">1</div><div class="vsl">Vote on Top.gg</div></div>
+        <div class="va">→</div>
+        <div class="vs"><div class="vsn">2</div><div class="vsl">Run /vote check</div></div>
+        <div class="va">→</div>
+        <div class="vs"><div class="vsn">3</div><div class="vsl">Pick your server</div></div>
+        <div class="va">→</div>
+        <div class="vs"><div class="vsn">4</div><div class="vsl">Premium unlocked!</div></div>
       </div>
+      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+        <a href="https://top.gg/bot/1482403011144843366/vote" class="bp lg" target="_blank" rel="noopener">🗳️ Vote on Top.gg</a>
+        <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-start;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:12px;padding:14px 20px;font-size:.825rem;color:var(--muted);text-align:left">
+          <div>🪙 <strong style="color:var(--text)">200+ coins</strong> per vote</div>
+          <div>⭐ <strong style="color:var(--text)">100 XP</strong> per vote</div>
+          <div>🏆 <strong style="color:var(--text)">16h Premium</strong> for any server</div>
+          <div>🔥 <strong style="color:var(--text)">Streak bonuses</strong> stack up</div>
+        </div>
+      </div>
+      <p style="margin-top:20px;margin-bottom:0;font-size:.8rem;color:var(--muted)">You can pick a <strong style="color:var(--text)">different server every time</strong> you vote. Vote reminders via DM — run <code style="color:var(--blurple);font-family:'JetBrains Mono',monospace">/vote remind</code> to opt in.</p>
     </div>
   </div>
 </section>
@@ -322,7 +386,7 @@
 <section class="cwrap" id="commands">
   <div class="cinner">
     <div class="slabel" style="text-align:center">Commands</div>
-    <h2 class="stitle" style="text-align:center">70+ Commands</h2>
+    <h2 class="stitle" style="text-align:center">75+ Commands</h2>
     <p class="ssub" style="text-align:center;margin:0 auto 32px;max-width:480px">Every slash command has a prefix equivalent using <code style="color:var(--blurple);font-family:'JetBrains Mono',monospace">%</code> by default. Commands marked ⭐ require Premium.</p>
 
     <div class="csearch-wrap">
@@ -341,11 +405,14 @@
           <div class="crow" data-cmd="/mute"><span class="cname">/mute</span><span class="cdesc">Timeout a member (up to 28 days)</span><span class="crow-tip">copy</span></div>
           <div class="crow" data-cmd="/unmute"><span class="cname">/unmute</span><span class="cdesc">Remove a timeout from a member</span><span class="crow-tip">copy</span></div>
           <div class="crow" data-cmd="/unban"><span class="cname">/unban</span><span class="cdesc">Unban a user by ID</span><span class="crow-tip">copy</span></div>
+          <div class="crow" data-cmd="/masstimeout"><span class="cname">/masstimeout</span><span class="cdesc">Timeout all humans or members with a specific role</span><span class="crow-tip">copy</span></div>
           <div class="crow" data-cmd="/warn"><span class="cname">/warn</span><span class="cdesc">Warn a member (stored in DB, DMs the user)</span><span class="crow-tip">copy</span></div>
           <div class="crow" data-cmd="/warnings"><span class="cname">/warnings</span><span class="cdesc">View all warnings for a member</span><span class="crow-tip">copy</span></div>
           <div class="crow" data-cmd="/clearwarn"><span class="cname">/clearwarn</span><span class="cdesc">Clear one or all warnings for a member</span><span class="crow-tip">copy</span></div>
           <div class="crow" data-cmd="/history"><span class="cname">/history</span><span class="cdesc">Full mod history — warnings, bans, and notes</span><span class="crow-tip">copy</span></div>
           <div class="crow" data-cmd="/note"><span class="cname">/note</span><span class="cdesc">Add, list, or delete staff-only notes on a member</span><span class="crow-tip">copy</span></div>
+          <div class="crow" data-cmd="/temprole"><span class="cname">/temprole</span><span class="cdesc">Temporarily assign a role — auto-removed after duration</span><span class="crow-tip">copy</span></div>
+          <div class="crow" data-cmd="/jail"><span class="cname">/jail</span><span class="cdesc">Jail a member — removes roles, assigns jail role, restores on release</span><span class="crow-tip">copy</span></div>
           <div class="crow" data-cmd="/purge"><span class="cname">/purge</span><span class="cdesc">Bulk delete messages (amount / user / until)</span><span class="crow-tip">copy</span></div>
           <div class="crow" data-cmd="/lock"><span class="cname">/lock</span><span class="cdesc">Lock a channel (prevent @everyone from sending)</span><span class="crow-tip">copy</span></div>
           <div class="crow" data-cmd="/unlock"><span class="cname">/unlock</span><span class="cdesc">Unlock a previously locked channel</span><span class="crow-tip">copy</span></div>
@@ -377,22 +444,21 @@
           <div class="crow" data-cmd="/customize"><span class="cname">/customize</span><span class="cdesc">⭐ Customize bot embed color and footer</span><span class="crow-tip">copy</span></div>
           <div class="crow" data-cmd="/setprefix"><span class="cname">/setprefix</span><span class="cdesc">Change the prefix command prefix</span><span class="crow-tip">copy</span></div>
           <div class="crow" data-cmd="/noprefix"><span class="cname">/noprefix</span><span class="cdesc">⭐ Manage premium no-prefix access</span><span class="crow-tip">copy</span></div>
-          <div class="crow" data-cmd="/embedtemplate"><span class="cname">/embedtemplate</span><span class="cdesc">Create and manage reusable embed templates</span><span class="crow-tip">copy</span></div>
         </div>
       </div>
 
       <div class="ccat" data-cat="info">
         <div class="cglbl">ℹ️ Info</div>
         <div class="clist">
-          <div class="crow" data-cmd="/help"><span class="cname">/help</span><span class="cdesc">Show the interactive help menu</span><span class="crow-tip">copy</span></div>
+          <div class="crow" data-cmd="/help"><span class="cname">/help</span><span class="cdesc">Show the interactive help menu (works with prefix too)</span><span class="crow-tip">copy</span></div>
+          <div class="crow" data-cmd="/setupcheck"><span class="cname">/setupcheck</span><span class="cdesc">Check bot setup and permissions</span><span class="crow-tip">copy</span></div>
           <div class="crow" data-cmd="/ping"><span class="cname">/ping</span><span class="cdesc">Check bot latency and API response time</span><span class="crow-tip">copy</span></div>
-          <div class="crow" data-cmd="/botinfo"><span class="cname">/botinfo</span><span class="cdesc">View bot statistics and version info</span><span class="crow-tip">copy</span></div>
+          <div class="crow" data-cmd="/botinfo"><span class="cname">/botinfo</span><span class="cdesc">View bot statistics</span><span class="crow-tip">copy</span></div>
           <div class="crow" data-cmd="/serverinfo"><span class="cname">/serverinfo</span><span class="cdesc">View detailed server information</span><span class="crow-tip">copy</span></div>
           <div class="crow" data-cmd="/userinfo"><span class="cname">/userinfo</span><span class="cdesc">View user profile and account details</span><span class="crow-tip">copy</span></div>
           <div class="crow" data-cmd="/avatar"><span class="cname">/avatar</span><span class="cdesc">View a user's avatar in full size</span><span class="crow-tip">copy</span></div>
-          <div class="crow" data-cmd="/banner"><span class="cname">/banner</span><span class="cdesc">View a user's profile banner</span><span class="crow-tip">copy</span></div>
-          <div class="crow" data-cmd="/invite"><span class="cname">/invite</span><span class="cdesc">Get the bot invite link and useful links</span><span class="crow-tip">copy</span></div>
-          <div class="crow" data-cmd="/setupcheck"><span class="cname">/setupcheck</span><span class="cdesc">Check bot setup and permissions</span><span class="crow-tip">copy</span></div>
+          <div class="crow" data-cmd="/banner"><span class="cname">/banner</span><span class="cdesc">View a user's banner</span><span class="crow-tip">copy</span></div>
+          <div class="crow" data-cmd="/invite"><span class="cname">/invite</span><span class="cdesc">Get the bot invite link</span><span class="crow-tip">copy</span></div>
           <div class="crow" data-cmd="/changelog"><span class="cname">/changelog</span><span class="cdesc">View the latest bot changelog and version history</span><span class="crow-tip">copy</span></div>
         </div>
       </div>
@@ -404,19 +470,19 @@
           <div class="crow" data-cmd="/sticky"><span class="cname">/sticky</span><span class="cdesc">Stick a message to the bottom of a channel</span><span class="crow-tip">copy</span></div>
           <div class="crow" data-cmd="/snipe"><span class="cname">/snipe</span><span class="cdesc">View the last deleted message in a channel</span><span class="crow-tip">copy</span></div>
           <div class="crow" data-cmd="/remind"><span class="cname">/remind</span><span class="cdesc">Set a personal reminder</span><span class="crow-tip">copy</span></div>
-          <div class="crow" data-cmd="/poll"><span class="cname">/poll</span><span class="cdesc">Create a reaction poll with up to 10 options</span><span class="crow-tip">copy</span></div>
+          <div class="crow" data-cmd="/poll"><span class="cname">/poll</span><span class="cdesc">Create a reaction-based poll with up to 10 options</span><span class="crow-tip">copy</span></div>
           <div class="crow" data-cmd="/translate"><span class="cname">/translate</span><span class="cdesc">Translate text to any language</span><span class="crow-tip">copy</span></div>
-          <div class="crow" data-cmd="/afk"><span class="cname">/afk</span><span class="cdesc">Set AFK status — bot notifies people who ping you</span><span class="crow-tip">copy</span></div>
+          <div class="crow" data-cmd="/afk"><span class="cname">/afk</span><span class="cdesc">Set an AFK status that notifies people who ping you</span><span class="crow-tip">copy</span></div>
           <div class="crow" data-cmd="/embed"><span class="cname">/embed</span><span class="cdesc">Build and post a custom embed message</span><span class="crow-tip">copy</span></div>
-          <div class="crow" data-cmd="/schedule"><span class="cname">/schedule</span><span class="cdesc">Schedule a message to be sent at a specific time</span><span class="crow-tip">copy</span></div>
-          <div class="crow" data-cmd="/vote"><span class="cname">/vote</span><span class="cdesc">Vote for the bot and earn rewards (coming soon)</span><span class="crow-tip">copy</span></div>
+          <div class="crow" data-cmd="/schedule"><span class="cname">/schedule</span><span class="cdesc">Schedule a message to be sent later</span><span class="crow-tip">copy</span></div>
+          <div class="crow" data-cmd="/vote"><span class="cname">/vote</span><span class="cdesc">Vote on Top.gg — earn coins, XP &amp; 16h Premium for any server</span><span class="crow-tip">copy</span></div>
         </div>
       </div>
 
       <div class="ccat" data-cat="community">
         <div class="cglbl">🏆 Community</div>
         <div class="clist">
-          <div class="crow" data-cmd="/rank"><span class="cname">/rank</span><span class="cdesc">View your XP, level, and rank in the server</span><span class="crow-tip">copy</span></div>
+          <div class="crow" data-cmd="/rank"><span class="cname">/rank</span><span class="cdesc">View your current XP, level, and rank</span><span class="crow-tip">copy</span></div>
           <div class="crow" data-cmd="/leaderboard"><span class="cname">/leaderboard</span><span class="cdesc">View the top members by XP</span><span class="crow-tip">copy</span></div>
           <div class="crow" data-cmd="/daily"><span class="cname">/daily</span><span class="cdesc">Claim your daily coins reward</span><span class="crow-tip">copy</span></div>
           <div class="crow" data-cmd="/profile"><span class="cname">/profile</span><span class="cdesc">View your full community profile</span><span class="crow-tip">copy</span></div>
@@ -426,12 +492,11 @@
       <div class="ccat" data-cat="premium">
         <div class="cglbl">⭐ Premium / AI</div>
         <div class="clist">
-          <div class="crow" data-cmd="/ai"><span class="cname">/ai</span><span class="cdesc">⭐ AI assistant — describe actions in plain English</span><span class="crow-tip">copy</span></div>
+          <div class="crow" data-cmd="/ai"><span class="cname">/ai</span><span class="cdesc">⭐ AI Assistant — natural-language moderation and server management</span><span class="crow-tip">copy</span></div>
           <div class="crow" data-cmd="/ailog"><span class="cname">/ailog</span><span class="cdesc">⭐ View the AI assistant audit log</span><span class="crow-tip">copy</span></div>
-          <div class="crow" data-cmd="/features"><span class="cname">/features</span><span class="cdesc">Toggle server features on/off</span><span class="crow-tip">copy</span></div>
-          <div class="crow" data-cmd="/perks"><span class="cname">/perks</span><span class="cdesc">View all premium features and perks</span><span class="crow-tip">copy</span></div>
-          <div class="crow" data-cmd="/freetrial"><span class="cname">/freetrial</span><span class="cdesc">Activate a free trial of premium</span><span class="crow-tip">copy</span></div>
-          <div class="crow" data-cmd="/premium"><span class="cname">/premium</span><span class="cdesc">Manage premium status</span><span class="crow-tip">copy</span></div>
+          <div class="crow" data-cmd="/premium"><span class="cname">/premium</span><span class="cdesc">Check premium status and activate via vote</span><span class="crow-tip">copy</span></div>
+          <div class="crow" data-cmd="/premiumadmin"><span class="cname">/premiumadmin</span><span class="cdesc">Admin tools for premium management</span><span class="crow-tip">copy</span></div>
+          <div class="crow" data-cmd="/freetrial"><span class="cname">/freetrial</span><span class="cdesc">Activate a free 30-day trial of premium</span><span class="crow-tip">copy</span></div>
         </div>
       </div>
 
@@ -439,9 +504,21 @@
   </div>
 </section>
 
+<!-- ── CHANGELOG ── -->
+<section class="clwrap" id="changelog">
+  <div class="clinner">
+    <div class="slabel">What's New</div>
+    <h2 class="stitle">Changelog</h2>
+    <p class="ssub">Every update to Crux, tracked here. Latest version at the top.</p>
+    <div class="clentries" id="clEntries">
+      <!-- Populated by JS below -->
+    </div>
+  </div>
+</section>
+
 <section class="ctawrap">
-  <h2>Ready to upgrade your server?</h2>
-  <p>Add Crux in seconds and get started right away.</p>
+  <h2><span class="grad">Ready to level up<br/>your server?</span></h2>
+  <p>Add Crux in seconds. No setup required for core features.</p>
   <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
     <a href="https://discord.com/oauth2/authorize?client_id=1482403011144843366&permissions=8&integration_type=0&scope=bot+applications.commands" class="bp lg" target="_blank" rel="noopener">➕ Add Crux to Your Server</a>
     <a href="https://discord.gg/7p3V3Vb8Vt" class="bs" target="_blank" rel="noopener">💬 Join Support Server</a>
@@ -449,96 +526,260 @@
 </section>
 
 <footer>
-  <div class="flogo"><img src="logo.jpg" alt="Crux" style="width:28px;height:28px;border-radius:8px;object-fit:cover" />Crux Bot</div>
+  <div class="flogo"><img src="logo.jpg" alt="Crux" style="width:28px;height:28px;border-radius:8px;object-fit:cover" />Crux</div>
   <div class="flinks">
-    <a href="https://discord.com/oauth2/authorize?client_id=1482403011144843366&permissions=8&integration_type=0&scope=bot+applications.commands" target="_blank" rel="noopener">Invite</a>
-    <a href="https://discord.gg/7p3V3Vb8Vt" target="_blank" rel="noopener">Support</a>
     <a href="#features">Features</a>
+    <a href="#premium">Premium</a>
     <a href="#commands">Commands</a>
+    <a href="#changelog">Changelog</a>
+    <a href="https://top.gg/bot/1482403011144843366" target="_blank" rel="noopener">Top.gg</a>
+    <a href="https://discord.gg/7p3V3Vb8Vt" target="_blank" rel="noopener">Support</a>
   </div>
-  <div class="fcopy">&copy; 2026 Crux Bot &mdash; v2.6</div>
+  <div class="fcopy">© 2026 Crux Bot. All rights reserved.</div>
 </footer>
 
-<!-- Copy toast -->
-<div class="toast" id="toast"><span class="tck">✓</span><span id="toastMsg">Copied!</span></div>
+<div class="toast" id="toast"><span class="tck">✓</span> Copied!</div>
 
 <script>
-// ── HAMBURGER ──
-const hamBtn = document.getElementById('hamBtn');
-const mobileNav = document.getElementById('mobileNav');
-hamBtn.addEventListener('click', () => {
-  const open = mobileNav.classList.toggle('open');
-  hamBtn.classList.toggle('open', open);
+// ── CHANGELOG DATA ────────────────────────────────────────────────────────────
+const CHANGELOG = [
+  {
+    version: "2.7",
+    title: "Jail, TempRole, Mass Timeout & Live Voting",
+    date: "May 12, 2026",
+    sections: {
+      added: [
+        "<strong>Jail System</strong> — /jail setup to configure, /jail member to isolate (removes all roles), /jail release to restore roles automatically.",
+        "<strong>TempRole</strong> — /temprole @user &lt;role&gt; &lt;duration&gt; temporarily assigns a role and auto-removes it on expiry. Survives bot restarts.",
+        "<strong>Mass Timeout</strong> — /masstimeout times out all humans or members with a specific role in one command.",
+        "<strong>Top.gg Vote Webhook</strong> — votes are received live. You're automatically DM'd with a server picker to apply 16h of Premium instantly.",
+        "<strong>Vote Reminders</strong> — run /vote remind to get a DM when your 12-hour cooldown is up.",
+        "<strong>Interactive prefix help</strong> — %help now shows the same live dropdown menu as /help.",
+      ],
+      changed: [
+        "<strong>Vote Premium duration</strong> — increased from 12 hours to <strong>16 hours</strong> per vote.",
+        "<strong>Premium expiry DMs</strong> — renewal instructions now match how you activated: vote, trial, or admin grant.",
+        "<strong>Premium denied embeds</strong> — upsell now correctly mentions 16h and the /vote check flow.",
+      ]
+    }
+  },
+  {
+    version: "2.6",
+    title: "Bug Fixes & AI Improvements",
+    date: "May 10, 2026",
+    sections: {
+      fixed: [
+        "<strong>Join-to-Create</strong> — bot was not detecting hub joins; temp VCs now create correctly.",
+        "<strong>/j2cpanel</strong> — was saying 'not in voice channel' even when you were. Now fixed.",
+        "<strong>{game} name template</strong> — now correctly replaced with the actual game name.",
+        "<strong>Custom Commands</strong> — /customcmd add was crashing; missing table now created.",
+        "<strong>Embed Templates</strong> — /embedtemplate create was crashing due to Discord label limits. Fixed.",
+        "<strong>AI Assistant</strong> — now knows all J2C commands and won't confuse /j2cpanel with ticket panel.",
+      ]
+    }
+  },
+  {
+    version: "2.5",
+    title: "The Big Systems Update",
+    date: "May 9, 2026",
+    sections: {
+      added: [
+        "<strong>Embed Template System</strong> — create named embed templates with /embedtemplate create.",
+        "<strong>Leave/Goodbye Messages</strong> — configure a leave channel and message via /welcome setleave.",
+        "<strong>Verification System</strong> — /verification setup posts a button panel for verified role.",
+        "<strong>AntiNuke Protection</strong> — detects mass bans/kicks/deletions with punishment + whitelist.",
+        "<strong>Anonymous Confession System</strong> — /confession setup with optional mod review queue.",
+        "<strong>Top.gg Vote Rewards</strong> — /vote checks vote status, credits coins + XP, tracks streaks.",
+        "<strong>Interactive Help Menu</strong> — /help now shows a live dropdown with all command categories.",
+        "<strong>Rate Limiting</strong> — all commands are now rate-limited to prevent abuse.",
+        "<strong>Automod Link & Invite Filter</strong> — /automod blocklinks and /automod blockinvites.",
+        "<strong>Changelog System</strong> — /changelog latest and /changelog announce.",
+      ],
+      changed: [
+        "<strong>Welcome messages</strong> now support embed templates.",
+        "<strong>VC logging</strong> — voice state events now logged to mod-log channel.",
+        "<strong>Role & channel logging</strong> — role and channel deletes now logged.",
+      ],
+      fixed: [
+        "<strong>No-prefix bug</strong> — bot owner no longer bypasses no-prefix in other servers.",
+        "<strong>Ticket channel names</strong> changed from ticket-0001 to ticket-username format.",
+      ]
+    }
+  },
+  {
+    version: "2.4",
+    title: "Top.gg Compliance & Paid Premium",
+    date: "Apr 20, 2026",
+    sections: {
+      added: [
+        "<strong>/premiumadmin activate</strong> — bot owner can grant Premium to any server.",
+        "<strong>/premiumadmin revoke</strong> — bot owner can immediately remove Premium.",
+        "<strong>Paid permanent Premium</strong> — servers can receive lifetime Premium.",
+      ],
+      changed: [
+        "<strong>Invite link</strong> — updated to granular permissions (Top.gg compliant).",
+        "<strong>/premiumadmin</strong> — refactored into full subcommand suite: list, activate, revoke.",
+      ],
+      fixed: [
+        "<strong>No-prefix bot owner bypass</strong> — now correctly respects per-server access controls.",
+      ]
+    }
+  },
+  {
+    version: "2.3",
+    title: "Self-Service Premium & Vote Rewards",
+    date: "Apr 1, 2026",
+    sections: {
+      added: [
+        "<strong>Vote-Based Premium</strong> — vote for Crux on Top.gg to unlock Premium for your server.",
+        "<strong>30-Day Free Trial</strong> — activate a one-time 30-day trial with /freetrial.",
+        "<strong>Self-service premium</strong> — all premium activation controlled by server owner.",
+      ],
+      changed: [
+        "<strong>/premium</strong> — now has a vote subcommand for server owners.",
+        "<strong>/freetrial</strong> — usable by server owner directly; trial extended from 7 to 30 days.",
+        "<strong>Premium denied messages</strong> — now direct users to vote or use /freetrial.",
+      ],
+      fixed: [
+        "<strong>Import crash on startup</strong> — dead imports in antinuke.js and confession.js.",
+        "<strong>Changelog subcommand crash</strong> — permissions were applied to wrong builder.",
+        "<strong>Voice state event crash</strong> — missing export in voiceStateUpdate.js.",
+        "<strong>Prefix help crash</strong> — nonexistent function call replaced.",
+        "<strong>/noprefix</strong> — guild owner check is now the sole gate as intended.",
+      ]
+    }
+  },
+  {
+    version: "2.1",
+    title: "Stability & Logging",
+    date: "Mar 10, 2026",
+    sections: {
+      added: [
+        "Mod-log channel support for bans, kicks, mutes, warns.",
+        "Temp-ban system with automatic unban scheduling.",
+        "Join-to-Create (J2C) voice channel hubs.",
+        "Starboard — hall-of-fame channel for starred messages.",
+        "Birthday system with daily announcements.",
+      ],
+      fixed: [
+        "Purge command now correctly handles bulk-delete limits.",
+        "Reaction roles no longer fire on bot reactions.",
+      ]
+    }
+  },
+  {
+    version: "2.0",
+    title: "The Foundation",
+    date: "Feb 15, 2026",
+    sections: {
+      added: [
+        "Complete rewrite with Discord.js v14 and slash commands.",
+        "Drizzle ORM + PostgreSQL database backend.",
+        "Giveaway system with winners, required roles, and bonus entries.",
+        "AI Assistant (Premium) — natural-language moderation and server management.",
+        "Ticket system with transcript saving.",
+        "Reaction roles.",
+        "AFK system.",
+        "Custom commands (Premium).",
+      ]
+    }
+  }
+];
+
+const SECTION_LABELS = { added: "Added", changed: "Changed", fixed: "Fixed", removed: "Removed" };
+
+function renderChangelog() {
+  const container = document.getElementById("clEntries");
+  if (!container) return;
+  container.innerHTML = CHANGELOG.map((entry, i) => {
+    const sectionsHtml = Object.entries(entry.sections).map(([key, items]) => `
+      <div class="clsection">
+        <div class="clsec-label clsec-${key}">${SECTION_LABELS[key] ?? key}</div>
+        <ul class="clitems">${items.map(t => `<li><span></span><span>${t}</span></li>`).join("")}</ul>
+      </div>
+    `).join("");
+    return `
+      <div class="clentry${i === 0 ? " open" : ""}" id="cl-${entry.version}">
+        <div class="clheader" onclick="toggleChangelog(this.parentElement)">
+          <span class="clver">v${entry.version}</span>
+          <span class="cltitle">${entry.title}</span>
+          <span class="cldate">${entry.date}</span>
+          <span class="clchevron">▼</span>
+        </div>
+        <div class="clbody">${sectionsHtml}</div>
+      </div>
+    `;
+  }).join("");
+}
+
+function toggleChangelog(el) {
+  el.classList.toggle("open");
+}
+
+renderChangelog();
+
+// ── NAV hamburger ─────────────────────────────────────────────────────────────
+const hamBtn = document.getElementById("hamBtn");
+const mobileNav = document.getElementById("mobileNav");
+hamBtn?.addEventListener("click", () => {
+  hamBtn.classList.toggle("open");
+  mobileNav.classList.toggle("open");
 });
 function closeNav() {
-  mobileNav.classList.remove('open');
-  hamBtn.classList.remove('open');
+  hamBtn?.classList.remove("open");
+  mobileNav?.classList.remove("open");
 }
-document.addEventListener('click', e => {
-  if (!mobileNav.contains(e.target) && !hamBtn.contains(e.target)) closeNav();
+
+// ── Hero number counter ───────────────────────────────────────────────────────
+document.querySelectorAll("[data-count]").forEach(el => {
+  const target = parseInt(el.dataset.count);
+  const suffix = el.dataset.suffix ?? "";
+  let start = 0;
+  const step = () => {
+    start += Math.ceil(target / 40);
+    if (start >= target) { el.textContent = target + suffix; return; }
+    el.textContent = start + suffix;
+    requestAnimationFrame(step);
+  };
+  step();
+});
+document.querySelectorAll("[data-static]").forEach(el => {
+  el.textContent = el.dataset.static;
 });
 
-// ── STAT COUNT-UP ──
-function animateCount(el, target, suffix) {
-  const dur = 1400;
-  const start = performance.now();
-  function step(now) {
-    const p = Math.min((now - start) / dur, 1);
-    const eased = 1 - Math.pow(1 - p, 3);
-    el.textContent = Math.round(eased * target) + suffix;
-    if (p < 1) requestAnimationFrame(step);
-  }
-  requestAnimationFrame(step);
-}
-const statsObserver = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      const el = e.target;
-      const target = parseInt(el.dataset.count);
-      const suffix = el.dataset.suffix || '';
-      animateCount(el, target, suffix);
-      statsObserver.unobserve(el);
-    }
-  });
-}, { threshold: 0.5 });
-document.querySelectorAll('.hnum[data-count]').forEach(el => statsObserver.observe(el));
-
-// ── CLICK TO COPY ──
+// ── Command copy ──────────────────────────────────────────────────────────────
+const toast = document.getElementById("toast");
 let toastTimer;
-const toast = document.getElementById('toast');
-const toastMsg = document.getElementById('toastMsg');
-document.querySelectorAll('.crow').forEach(row => {
-  row.addEventListener('click', () => {
+document.querySelectorAll(".crow[data-cmd]").forEach(row => {
+  row.addEventListener("click", () => {
     const cmd = row.dataset.cmd;
     navigator.clipboard.writeText(cmd).then(() => {
-      toastMsg.textContent = cmd + ' copied!';
-      toast.classList.add('show');
       clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => toast.classList.remove('show'), 2000);
-    });
+      toast.classList.add("show");
+      toastTimer = setTimeout(() => toast.classList.remove("show"), 2200);
+    }).catch(() => {});
   });
 });
 
-// ── COMMAND SEARCH ──
-const searchInput = document.getElementById('cmdSearch');
-const noResults = document.getElementById('noResults');
-const cmdGrid = document.getElementById('cmdGrid');
-searchInput.addEventListener('input', () => {
+// ── Command search ────────────────────────────────────────────────────────────
+const searchInput = document.getElementById("cmdSearch");
+const noResults = document.getElementById("noResults");
+searchInput?.addEventListener("input", () => {
   const q = searchInput.value.toLowerCase().trim();
   let anyVisible = false;
-  document.querySelectorAll('.ccat').forEach(cat => {
-    let catHasVisible = false;
-    cat.querySelectorAll('.crow').forEach(row => {
-      const name = row.dataset.cmd.toLowerCase();
-      const desc = row.querySelector('.cdesc').textContent.toLowerCase();
-      const match = !q || name.includes(q) || desc.includes(q);
-      row.classList.toggle('chidden', !match);
-      if (match) { catHasVisible = true; anyVisible = true; }
+  document.querySelectorAll(".ccat").forEach(cat => {
+    let catVisible = false;
+    cat.querySelectorAll(".crow").forEach(row => {
+      const cmd = row.querySelector(".cname")?.textContent ?? "";
+      const desc = row.querySelector(".cdesc")?.textContent ?? "";
+      const match = !q || cmd.toLowerCase().includes(q) || desc.toLowerCase().includes(q);
+      row.classList.toggle("chidden", !match);
+      if (match) catVisible = true;
     });
-    cat.classList.toggle('ccat-empty', !catHasVisible);
+    cat.classList.toggle("ccat-empty", !catVisible);
+    if (catVisible) anyVisible = true;
   });
-  noResults.style.display = anyVisible ? 'none' : 'block';
-  cmdGrid.style.display = anyVisible ? '' : 'none';
+  noResults.style.display = anyVisible ? "none" : "block";
 });
 </script>
 
