@@ -215,8 +215,8 @@
 
 <!-- ── NOTICE BANNER ── -->
 <div class="notice-banner">
-  <span class="nb-badge">🆕 v2.7</span>
-  Jail system, TempRole, Mass Timeout &amp; live Top.gg voting — now live!
+  <span class="nb-badge">🆕 v2.8</span>
+  Role members list, smart role toggle, prefix aliases &amp; per-server avatar fixes — now live!
   <a href="#changelog">See what's new →</a>
 </div>
 
@@ -249,7 +249,7 @@
 </div>
 
 <section class="hero">
-  <div class="hbadge">✨ v2.7 — Jail, TempRole, Mass Timeout &amp; Live Voting</div>
+  <div class="hbadge">✨ v2.8 — inrole, role toggle, prefix aliases &amp; avatar fixes</div>
   <h1><span class="grad">The Discord Bot<br/>Your Server Deserves</span></h1>
   <p class="hsub">Full moderation, AI-powered commands, AutoMod, tickets, giveaways, and more — all in one bot.</p>
   <div class="hctas">
@@ -263,7 +263,7 @@
     <div class="sdiv"></div>
     <div class="hstat"><div class="hnum" data-static="Free">Free</div><div class="hlbl">Open Source</div></div>
     <div class="sdiv"></div>
-    <div class="hstat"><div class="hnum" data-static="v2.7">v2.7</div><div class="hlbl">Latest Version</div></div>
+    <div class="hstat"><div class="hnum" data-static="v2.8">v2.8</div><div class="hlbl">Latest Version</div></div>
   </div>
 </section>
 
@@ -386,7 +386,7 @@
 <section class="cwrap" id="commands">
   <div class="cinner">
     <div class="slabel" style="text-align:center">Commands</div>
-    <h2 class="stitle" style="text-align:center">75+ Commands</h2>
+    <h2 class="stitle" style="text-align:center">80+ Commands</h2>
     <p class="ssub" style="text-align:center;margin:0 auto 32px;max-width:480px">Every slash command has a prefix equivalent using <code style="color:var(--blurple);font-family:'JetBrains Mono',monospace">%</code> by default. Commands marked ⭐ require Premium.</p>
 
     <div class="csearch-wrap">
@@ -543,6 +543,29 @@
 <script>
 // ── CHANGELOG DATA ────────────────────────────────────────────────────────────
 const CHANGELOG = [
+  {
+    version: "2.8",
+    title: "inrole, Role Toggle, Prefix Aliases & Fixes",
+    date: "May 20, 2026",
+    sections: {
+      added: [
+        "<strong>/role members</strong> — list every member with a specific role, paginated with Prev/Next buttons. No pings.",
+        "<strong>%inrole / %members</strong> — prefix equivalent. Accepts role mention, ID, or name.",
+        "<strong>Role toggle shortcut</strong> — <code>%role &lt;uid&gt; &lt;role-id&gt;</code> adds the role if they don't have it, removes it if they do. Works with raw user and role IDs.",
+        "<strong>Prefix command aliases</strong> — %to/%timeout (mute), %rto (remove timeout), %ub (unban), %um/%cw, %clear (purge), %ui/%whois, %si, %av/%pfp, %rename, %topic, %move.",
+        "<strong>Animated emoji server</strong> — set EMOJI_SERVER_ID to a server you own; the bot loads all emojis from it and can use them anywhere.",
+      ],
+      changed: [
+        "<strong>/customize status</strong> — now force-fetches the bot member to correctly show whether a custom per-server avatar is set.",
+        "<strong>/role</strong> — updated to mention toggle and UID support in descriptions.",
+      ],
+      fixed: [
+        "<strong>/warn</strong> — bots can no longer be warned.",
+        "<strong>/customize</strong> — removed Server Banner subcommand (Discord restricts this to verified bots).",
+        "<strong>Sticky messages</strong> — no longer prefixed with 📌 Sticky: — messages post as plain content.",
+      ]
+    }
+  },
   {
     version: "2.7",
     title: "Jail, TempRole, Mass Timeout & Live Voting",
