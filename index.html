@@ -545,24 +545,22 @@
 const CHANGELOG = [
   {
     version: "2.8",
-    title: "inrole, Role Toggle, Prefix Aliases & Fixes",
+    title: "Quality of Life & Cleanup",
     date: "May 20, 2026",
     sections: {
       added: [
-        "<strong>/role members</strong> — list every member with a specific role, paginated with Prev/Next buttons. No pings.",
-        "<strong>%inrole / %members</strong> — prefix equivalent. Accepts role mention, ID, or name.",
-        "<strong>Role toggle shortcut</strong> — <code>%role &lt;uid&gt; &lt;role-id&gt;</code> adds the role if they don't have it, removes it if they do. Works with raw user and role IDs.",
-        "<strong>Prefix command aliases</strong> — %to/%timeout (mute), %rto (remove timeout), %ub (unban), %um/%cw, %clear (purge), %ui/%whois, %si, %av/%pfp, %rename, %topic, %move.",
-        "<strong>Animated emoji server</strong> — set EMOJI_SERVER_ID to a server you own; the bot loads all emojis from it and can use them anywhere.",
+        "<strong>/role members</strong> — lists everyone with a specific role, paginated with next/prev buttons. No pings. Also works as <code>%inrole @role</code> if you prefer prefix.",
+        "<strong>Role toggle shortcut</strong> — <code>%role &lt;user-id&gt; &lt;role-id&gt;</code> adds the role if they don't have it, removes it if they do. No add/remove subcommand needed. Raw IDs and mentions both work.",
+        "<strong>Prefix aliases</strong> — <code>%to</code> for timeout, <code>%rto</code> to remove it, <code>%clear</code> for purge, <code>%ui</code> for userinfo, <code>%si</code> for serverinfo, <code>%av</code> for avatar, <code>%rename</code>/<code>%topic</code>/<code>%move</code> for channel stuff. The risky ones (ban, kick, warn) stay without shortcuts.",
+        "<strong>Emoji server support</strong> — set <code>EMOJI_SERVER_ID</code> to a server you own and the bot loads all custom/animated emojis from it on startup. Use them anywhere in messages.",
       ],
       changed: [
-        "<strong>/customize status</strong> — now force-fetches the bot member to correctly show whether a custom per-server avatar is set.",
-        "<strong>/role</strong> — updated to mention toggle and UID support in descriptions.",
+        "<strong>/customize status</strong> — was showing 'Global default' for server avatar even when you had one set. Now force-fetches so it actually reflects what Discord has.",
       ],
       fixed: [
-        "<strong>/warn</strong> — bots can no longer be warned.",
-        "<strong>/customize</strong> — removed Server Banner subcommand (Discord restricts this to verified bots).",
-        "<strong>Sticky messages</strong> — no longer prefixed with 📌 Sticky: — messages post as plain content.",
+        "<strong>/warn on bots</strong> — you could warn the bot itself. Now you can't.",
+        "<strong>Sticky messages</strong> — were posting with a 📌 Sticky: prefix in front of the content. That's gone now. Just the content.",
+        "<strong>Server banner subcommand</strong> — removed. Discord only allows this for verified/partnered bots so it was just erroring for everyone.",
       ]
     }
   },
@@ -572,17 +570,17 @@ const CHANGELOG = [
     date: "May 12, 2026",
     sections: {
       added: [
-        "<strong>Jail System</strong> — /jail setup to configure, /jail member to isolate (removes all roles), /jail release to restore roles automatically.",
-        "<strong>TempRole</strong> — /temprole @user &lt;role&gt; &lt;duration&gt; temporarily assigns a role and auto-removes it on expiry. Survives bot restarts.",
-        "<strong>Mass Timeout</strong> — /masstimeout times out all humans or members with a specific role in one command.",
-        "<strong>Top.gg Vote Webhook</strong> — votes are received live. You're automatically DM'd with a server picker to apply 16h of Premium instantly.",
-        "<strong>Vote Reminders</strong> — run /vote remind to get a DM when your 12-hour cooldown is up.",
-        "<strong>Interactive prefix help</strong> — %help now shows the same live dropdown menu as /help.",
+        "<strong>Jail System</strong> — <code>/jail setup</code> to configure the jail role and channel, then <code>/jail member</code> to isolate someone. Strips all their roles, gives them the jail role. Run it again to release and restore everything.",
+        "<strong>TempRole</strong> — <code>/temprole @user &lt;role&gt; &lt;duration&gt;</code> gives someone a role for a set time and auto-removes it on expiry. Works even after restarts.",
+        "<strong>Mass Timeout</strong> — <code>/masstimeout</code> to timeout everyone in a role or all non-bot members at once. Useful when things get messy.",
+        "<strong>Live vote webhook</strong> — votes from Top.gg hit the bot instantly. You get a DM the second your vote registers, with a server picker if you're in multiple servers.",
+        "<strong>Vote reminders</strong> — <code>/vote remind</code> to get a DM when your 12h cooldown is up. Run it again to turn it off.",
+        "<strong>%help dropdown</strong> — prefix help now shows the same interactive category menu as /help.",
       ],
       changed: [
-        "<strong>Vote Premium duration</strong> — increased from 12 hours to <strong>16 hours</strong> per vote.",
-        "<strong>Premium expiry DMs</strong> — renewal instructions now match how you activated: vote, trial, or admin grant.",
-        "<strong>Premium denied embeds</strong> — upsell now correctly mentions 16h and the /vote check flow.",
+        "<strong>Vote premium</strong> bumped from 12h to 16h per vote.",
+        "<strong>Expiry DMs</strong> now tell you how to renew based on how you activated — vote link if you voted, trial info if it was a trial, owner contact if it was manual.",
+        "<strong>Premium denied messages</strong> updated to mention 16h and point to /vote check properly.",
       ]
     }
   },
@@ -592,12 +590,12 @@ const CHANGELOG = [
     date: "May 10, 2026",
     sections: {
       fixed: [
-        "<strong>Join-to-Create</strong> — bot was not detecting hub joins; temp VCs now create correctly.",
-        "<strong>/j2cpanel</strong> — was saying 'not in voice channel' even when you were. Now fixed.",
-        "<strong>{game} name template</strong> — now correctly replaced with the actual game name.",
-        "<strong>Custom Commands</strong> — /customcmd add was crashing; missing table now created.",
-        "<strong>Embed Templates</strong> — /embedtemplate create was crashing due to Discord label limits. Fixed.",
-        "<strong>AI Assistant</strong> — now knows all J2C commands and won't confuse /j2cpanel with ticket panel.",
+        "<strong>Join-to-Create</strong> — bot wasn't detecting hub joins so temp VCs were never created. Fixed.",
+        "<strong>/j2cpanel</strong> — was saying 'join a voice channel' even when you were already in your temp VC. Fixed.",
+        "<strong>{game} template</strong> — wasn't being replaced with the actual game name in J2C channel names. Now it is.",
+        "<strong>Custom commands</strong> — /customcmd add was crashing for everyone. Missing table. Created it.",
+        "<strong>Embed templates</strong> — /embedtemplate create was crashing on open. Discord label length issue. Fixed.",
+        "<strong>AI assistant</strong> — was confusing /j2cpanel with the ticket panel. Gave it better context.",
       ]
     }
   },
@@ -607,25 +605,25 @@ const CHANGELOG = [
     date: "May 9, 2026",
     sections: {
       added: [
-        "<strong>Embed Template System</strong> — create named embed templates with /embedtemplate create.",
-        "<strong>Leave/Goodbye Messages</strong> — configure a leave channel and message via /welcome setleave.",
-        "<strong>Verification System</strong> — /verification setup posts a button panel for verified role.",
-        "<strong>AntiNuke Protection</strong> — detects mass bans/kicks/deletions with punishment + whitelist.",
-        "<strong>Anonymous Confession System</strong> — /confession setup with optional mod review queue.",
-        "<strong>Top.gg Vote Rewards</strong> — /vote checks vote status, credits coins + XP, tracks streaks.",
-        "<strong>Interactive Help Menu</strong> — /help now shows a live dropdown with all command categories.",
-        "<strong>Rate Limiting</strong> — all commands are now rate-limited to prevent abuse.",
-        "<strong>Automod Link & Invite Filter</strong> — /automod blocklinks and /automod blockinvites.",
-        "<strong>Changelog System</strong> — /changelog latest and /changelog announce.",
+        "<strong>Embed templates</strong> — create named reusable embeds with /embedtemplate. Use them in welcome/leave messages and more.",
+        "<strong>Leave messages</strong> — /welcome setleave to set a goodbye message and channel.",
+        "<strong>Verification gate</strong> — /verification setup posts a button. Member clicks, gets the role.",
+        "<strong>AntiNuke</strong> — detects mass bans/kicks/deletes and takes action. Whitelist support so staff are safe.",
+        "<strong>Confession system</strong> — anonymous submissions via modal. Optional mod review queue.",
+        "<strong>Vote rewards</strong> — /vote tracks streaks and credits coins + XP per vote. Streak bonus stacks.",
+        "<strong>Interactive /help</strong> — category dropdown, updates in place. No more text walls.",
+        "<strong>Rate limiting</strong> — cooldowns on all commands now.",
+        "<strong>Automod link/invite filter</strong> — blocklinks and blockinvites with per-channel bypass support.",
+        "<strong>/changelog</strong> — latest and announce subcommands.",
       ],
       changed: [
         "<strong>Welcome messages</strong> now support embed templates.",
-        "<strong>VC logging</strong> — voice state events now logged to mod-log channel.",
-        "<strong>Role & channel logging</strong> — role and channel deletes now logged.",
+        "<strong>VC logging</strong> — joins, leaves, moves now show up in mod-log.",
+        "<strong>Role/channel logging</strong> — deletions now logged too.",
       ],
       fixed: [
-        "<strong>No-prefix bug</strong> — bot owner no longer bypasses no-prefix in other servers.",
-        "<strong>Ticket channel names</strong> changed from ticket-0001 to ticket-username format.",
+        "<strong>No-prefix bypass</strong> — bot owner was bypassing no-prefix restrictions in other servers. Fixed.",
+        "<strong>Ticket channel names</strong> switched from ticket-0001 to ticket-username.",
       ]
     }
   },
@@ -635,16 +633,16 @@ const CHANGELOG = [
     date: "Apr 20, 2026",
     sections: {
       added: [
-        "<strong>/premiumadmin activate</strong> — bot owner can grant Premium to any server.",
-        "<strong>/premiumadmin revoke</strong> — bot owner can immediately remove Premium.",
-        "<strong>Paid permanent Premium</strong> — servers can receive lifetime Premium.",
+        "<strong>/premiumadmin activate</strong> — grant premium to any server. Set it permanent or give it a time limit.",
+        "<strong>/premiumadmin revoke</strong> — remove premium from a server instantly.",
+        "<strong>Lifetime premium</strong> — servers can now have premium that never expires.",
       ],
       changed: [
-        "<strong>Invite link</strong> — updated to granular permissions (Top.gg compliant).",
-        "<strong>/premiumadmin</strong> — refactored into full subcommand suite: list, activate, revoke.",
+        "<strong>Invite link</strong> — switched to granular permissions instead of Administrator. Required for Top.gg.",
+        "<strong>/premiumadmin</strong> — properly split into list, activate, revoke subcommands.",
       ],
       fixed: [
-        "<strong>No-prefix bot owner bypass</strong> — now correctly respects per-server access controls.",
+        "<strong>Bot owner no-prefix bypass</strong> — was being applied globally instead of per-server.",
       ]
     }
   },
@@ -654,21 +652,21 @@ const CHANGELOG = [
     date: "Apr 1, 2026",
     sections: {
       added: [
-        "<strong>Vote-Based Premium</strong> — vote for Crux on Top.gg to unlock Premium for your server.",
-        "<strong>30-Day Free Trial</strong> — activate a one-time 30-day trial with /freetrial.",
-        "<strong>Self-service premium</strong> — all premium activation controlled by server owner.",
+        "<strong>Vote for premium</strong> — vote on Top.gg, get 12h of premium for your server. /vote check to claim it.",
+        "<strong>Free trial</strong> — /freetrial gives you 30 days of premium, one time per server. No middleman.",
+        "<strong>Self-service activation</strong> — server owners handle their own premium now.",
       ],
       changed: [
-        "<strong>/premium</strong> — now has a vote subcommand for server owners.",
-        "<strong>/freetrial</strong> — usable by server owner directly; trial extended from 7 to 30 days.",
-        "<strong>Premium denied messages</strong> — now direct users to vote or use /freetrial.",
+        "<strong>/premium</strong> — added a vote subcommand for server owners.",
+        "<strong>/freetrial</strong> — extended from 7 to 30 days. Server owner can run it directly.",
+        "<strong>Premium denied messages</strong> — now point to /vote or /freetrial instead of just saying no.",
       ],
       fixed: [
-        "<strong>Import crash on startup</strong> — dead imports in antinuke.js and confession.js.",
-        "<strong>Changelog subcommand crash</strong> — permissions were applied to wrong builder.",
-        "<strong>Voice state event crash</strong> — missing export in voiceStateUpdate.js.",
-        "<strong>Prefix help crash</strong> — nonexistent function call replaced.",
-        "<strong>/noprefix</strong> — guild owner check is now the sole gate as intended.",
+        "<strong>Startup crash</strong> — dead imports in antinuke.js and confession.js were stopping the bot from starting.",
+        "<strong>Changelog crash</strong> — permissions on wrong builder.",
+        "<strong>Voice state crash</strong> — missing export in voiceStateUpdate.js.",
+        "<strong>Prefix help crash</strong> — was calling a function that didn't exist.",
+        "<strong>/noprefix</strong> — guild owner check is now the actual gate.",
       ]
     }
   },
@@ -678,15 +676,15 @@ const CHANGELOG = [
     date: "Mar 10, 2026",
     sections: {
       added: [
-        "Mod-log channel support for bans, kicks, mutes, warns.",
-        "Temp-ban system with automatic unban scheduling.",
-        "Join-to-Create (J2C) voice channel hubs.",
-        "Starboard — hall-of-fame channel for starred messages.",
-        "Birthday system with daily announcements.",
+        "<strong>Mod-log channel</strong> — bans, kicks, mutes, warns all get logged.",
+        "<strong>Temp-bans</strong> — auto-unbanned when the duration is up.",
+        "<strong>Join-to-Create voice channels</strong> — join a hub, get a private VC.",
+        "<strong>Starboard</strong> — enough reactions and the message shows up in a dedicated channel.",
+        "<strong>Birthday announcements</strong> — set your birthday, get a shoutout.",
       ],
       fixed: [
-        "Purge command now correctly handles bulk-delete limits.",
-        "Reaction roles no longer fire on bot reactions.",
+        "Purge was failing on messages older than 14 days. Skips them now.",
+        "Reaction roles were firing when the bot reacted to set up a menu.",
       ]
     }
   },
@@ -696,14 +694,12 @@ const CHANGELOG = [
     date: "Feb 15, 2026",
     sections: {
       added: [
-        "Complete rewrite with Discord.js v14 and slash commands.",
-        "Drizzle ORM + PostgreSQL database backend.",
-        "Giveaway system with winners, required roles, and bonus entries.",
-        "AI Assistant (Premium) — natural-language moderation and server management.",
-        "Ticket system with transcript saving.",
-        "Reaction roles.",
-        "AFK system.",
-        "Custom commands (Premium).",
+        "Full rewrite — Discord.js v14, slash commands, proper structure.",
+        "Drizzle ORM + PostgreSQL — persistent data that survives restarts.",
+        "Giveaways — create, set required roles, pick winners, reroll.",
+        "AI Assistant (Premium) — describe what you want in English, bot figures out the command.",
+        "Ticket system — panels, threads, transcripts on close.",
+        "Reaction roles, AFK system, custom commands (Premium).",
       ]
     }
   }
