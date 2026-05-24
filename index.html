@@ -215,8 +215,8 @@
 
 <!-- ── NOTICE BANNER ── -->
 <div class="notice-banner">
-  <span class="nb-badge">🆕 v2.8</span>
-  Role members list, smart role toggle, prefix aliases &amp; per-server avatar fixes — now live!
+  <span class="nb-badge">🆕 v2.10</span>
+  Nuke command, purge bots, giveaway redesign &amp; server avatar fix — now live!
   <a href="#changelog">See what's new →</a>
 </div>
 
@@ -249,7 +249,7 @@
 </div>
 
 <section class="hero">
-  <div class="hbadge">✨ v2.8 — inrole, role toggle, prefix aliases &amp; avatar fixes</div>
+  <div class="hbadge">✨ v2.10 — nuke, purge bots, giveaway redesign &amp; avatar fix</div>
   <h1><span class="grad">The Discord Bot<br/>Your Server Deserves</span></h1>
   <p class="hsub">Full moderation, AI-powered commands, AutoMod, tickets, giveaways, and more — all in one bot.</p>
   <div class="hctas">
@@ -263,7 +263,7 @@
     <div class="sdiv"></div>
     <div class="hstat"><div class="hnum" data-static="Free">Free</div><div class="hlbl">Open Source</div></div>
     <div class="sdiv"></div>
-    <div class="hstat"><div class="hnum" data-static="v2.8">v2.8</div><div class="hlbl">Latest Version</div></div>
+    <div class="hstat"><div class="hnum" data-static="v2.10">v2.10</div><div class="hlbl">Latest Version</div></div>
   </div>
 </section>
 
@@ -543,6 +543,40 @@
 <script>
 // ── CHANGELOG DATA ────────────────────────────────────────────────────────────
 const CHANGELOG = [
+  {
+    version: "2.10",
+    title: "Nuke, Purge Bots & Giveaway Overhaul",
+    date: "May 24, 2026",
+    sections: {
+      added: [
+        "<strong>Nuke command</strong> — <code>/nuke</code> and <code>%nuke</code> (alias <code>%nk</code>). Shows a small confirmation embed with Nuke it / Cancel buttons before doing anything. On confirm it clones the channel — keeping the name, topic, slowmode, category, position, and all permission overwrites intact — deletes the original, then sends <code>first</code> in the clean channel. Your locks stay exactly as they were.",
+        "<strong>Purge bots</strong> — new subcommand on both <code>/purge</code> and <code>%purge</code>. Scans the last 100 messages (configurable) and bulk-deletes anything sent by a bot. Useful for clearing out command spam without touching regular messages.",
+      ],
+      changed: [
+        "<strong>Giveaway embed redesign</strong> — the prize is now the embed title instead of buried in the description. Ends time, winners count, and hosted by each have their own bolded line. Requirements (role gate, account age, bonus entries) are cleaned up with ☑ and ★ markers. Looks how a giveaway embed should look.",
+      ],
+      fixed: [
+        "<strong>/customize avatar</strong> — the avatar was actually being set correctly the whole time, but the success embed was showing the old URL because Discord's CDN hadn't propagated the change yet when the bot tried to re-fetch. Fixed to show the uploaded image directly in the embed, with a note that it can take up to 60s to appear in Discord clients. Also corrected the internal API call to use the proper <code>@me</code> endpoint.",
+      ]
+    }
+  },
+  {
+    version: "2.9",
+    title: "Time Tracking, Message Counter & Shortcuts",
+    date: "May 22, 2026",
+    sections: {
+      added: [
+        "<strong>/timediff</strong> — paste any Discord message ID and it tells you exactly when it was sent and how long ago. Pass two message IDs to get the time between them. Also accepts Unix timestamps, relative inputs like <code>3d ago</code>, and regular date strings. Works as <code>%timediff</code> with aliases <code>%td</code> and <code>%tdiff</code>.",
+        "<strong>/msgcount</strong> — per-user message tracking with a server leaderboard. <code>/msgcount @user</code> for a specific person, <code>/msgcount leaderboard</code> for the top 10. Also works as <code>%messages</code> and <code>%mc</code>. Counts from the first message the bot sees — nothing retroactive.",
+        "<strong>More prefix shortcuts</strong> — <code>%b</code> for ban, <code>%k</code> for kick, <code>%m</code> for mute, <code>%gw</code> for giveaway, <code>%tb</code> for tempban, <code>%lb</code> for leaderboard, and a few more. Full list in <code>%help</code>.",
+      ],
+      fixed: [
+        "<strong>Top.gg vote webhook</strong> — votes were being silently dropped and never registering. Fixed.",
+        "<strong>Vote streak logic</strong> — an edge case was resetting streaks that should have held. More reliable now.",
+        "<strong>Giveaway reroll</strong> — the original host could end up winning their own giveaway on a reroll. They're excluded from the pool now.",
+      ]
+    }
+  },
   {
     version: "2.8",
     title: "Quality of Life & Cleanup",
